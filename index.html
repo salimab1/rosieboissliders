@@ -61,8 +61,11 @@
       animation:fadeUp 1s ease 0.2s both;
     }
     @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-    .hero-logo-wrap { width:340px; margin-bottom:28px; }
+
+    /* FIX 1: Bigger logo in hero, black background removed */
+    .hero-logo-wrap { width:480px; margin-bottom:28px; }
     .hero-logo-wrap img { object-fit:contain; }
+
     .hero-tagline { font-size:1.1rem; font-weight:300; letter-spacing:0.06em; color:var(--cream); opacity:0.9; margin-bottom:6px; }
     .hero-sub { font-size:0.88rem; letter-spacing:0.14em; color:var(--gold); font-style:italic; margin-bottom:40px; }
     .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
@@ -161,12 +164,105 @@
     .btn-white { font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--white); color:var(--red-dk); padding:15px 40px; display:inline-block; transition:background 0.2s, transform 0.15s; font-weight:700; }
     .btn-white:hover { background:var(--cream); transform:translateY(-2px); }
 
+    /* FIX 2: CLM GIVEBACK SECTION */
+    .clm-section {
+      background: var(--dark);
+      padding: 90px 48px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .clm-section::before {
+      content: '♥';
+      position: absolute;
+      font-size: 26rem;
+      color: rgba(192,39,45,0.05);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      line-height: 1;
+    }
+    .clm-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+    .clm-heart {
+      width: 58px; height: 58px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.5rem;
+    }
+    .clm-inner .section-title { margin-bottom: 22px; }
+    .clm-inner p { font-size: 1rem; line-height: 1.85; color: var(--cream); opacity: 0.85; margin-bottom: 14px; max-width: 660px; margin-left: auto; margin-right: auto; }
+    .clm-inner p strong { color: var(--gold-lt); font-weight: 700; }
+    .clm-badge {
+      display: inline-block;
+      margin-top: 28px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,149,42,0.35);
+      padding: 12px 28px;
+    }
+    .clm-link {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--gray);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .clm-link:hover { color: var(--cream); }
+
+    /* FIX 3: CONTACT FORM */
+    .contact-section { background: var(--black); padding: 90px 48px; }
+    .contact-inner { max-width: 680px; margin: 0 auto; }
+    .contact-header { text-align: center; margin-bottom: 48px; }
+    .contact-header .gold-rule { margin: 18px auto 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--brown); border: 1px solid #2a1f0e;
+      color: var(--cream); font-family: 'Lato', sans-serif;
+      font-size: 0.9rem; padding: 14px 18px; outline: none;
+      transition: border-color 0.2s; width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group select option { background: var(--brown); }
+    .form-submit { text-align: center; margin-top: 8px; }
+    .form-submit button {
+      font-family: 'Oswald', sans-serif; font-size: 0.82rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      background: var(--red); color: var(--white);
+      border: none; padding: 16px 48px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .form-submit button:hover { background: var(--red-dk); transform: translateY(-2px); }
+    .form-success {
+      display: none; text-align: center; padding: 40px;
+      background: var(--brown); border: 1px solid rgba(201,149,42,0.3);
+    }
+    .form-success p:first-child { font-family:'Playfair Display',serif; font-size: 1.3rem; color: var(--gold-lt); margin-bottom: 10px; }
+    .form-success p:last-child { font-size: 0.88rem; color: var(--gray); }
+
     /* FOOTER */
     footer { background:var(--dark); padding:56px 48px 32px; border-top:1px solid rgba(201,149,42,0.15); }
     .footer-inner { max-width:1140px; margin:0 auto; }
     .footer-top { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:60px; margin-bottom:48px; }
-    .footer-logo { width:180px; margin-bottom:16px; }
+
+    /* FIX 2 cont: Footer logo black bg removed */
+    .footer-logo { width:200px; margin-bottom:16px; }
     .footer-logo img { object-fit:contain; }
+
     .footer-tagline { font-size:0.85rem; color:var(--gray); line-height:1.7; max-width:260px; }
     .footer-col h4 { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
     .footer-col a { display:block; font-size:0.85rem; color:var(--gray); padding:5px 0; transition:color 0.2s; }
@@ -178,7 +274,7 @@
       nav{padding:10px 20px;}
       .nav-links{display:none;}
       .hero-content{padding:110px 24px 80px;}
-      .hero-logo-wrap{width:250px;}
+      .hero-logo-wrap{width:280px;}
       .cat-grid{grid-template-columns:1fr;}
       .cat-card{height:220px;}
       .menu-section{padding:70px 20px;}
@@ -191,6 +287,9 @@
       .footer-top{grid-template-columns:1fr;gap:36px;}
       footer{padding:48px 20px 24px;}
       .catering-cta{padding:60px 20px;}
+      .clm-section{padding:60px 20px;}
+      .contact-section{padding:60px 20px;}
+      .form-row{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -203,6 +302,7 @@
     <li><a href="#menu">Menu</a></li>
     <li><a href="#story">Our Story</a></li>
     <li><a href="#schedule">Find Us</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="#catering" class="nav-cta">Book Catering</a></li>
   </ul>
 </nav>
@@ -259,7 +359,6 @@
       <button class="tab-btn" data-tab="sides">Sides</button>
       <button class="tab-btn" data-tab="drinks">Drinks</button>
     </div>
-
     <div class="menu-panel active" id="tab-sliders">
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Classic Rosie Slider</span><span class="item-price">$5.00</span></div><p class="item-desc">Smash-style beef patty, American cheese, pickles, Rosie sauce on a buttered brioche bun.</p><span class="item-tag">Fan Favorite</span></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Double Stack Slider</span><span class="item-price">$7.50</span></div><p class="item-desc">Two smashed patties, double cheese, caramelized onions, special sauce.</p></div>
@@ -268,7 +367,6 @@
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Mushroom Swiss Slider</span><span class="item-price">$6.50</span></div><p class="item-desc">Beef patty, sautéed mushrooms, Swiss cheese, garlic aioli.</p></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Slider 3-Pack</span><span class="item-price">$14.00</span></div><p class="item-desc">Any three sliders of your choice. Mix and match.</p><span class="item-tag">Best Value</span></div>
     </div>
-
     <div class="menu-panel" id="tab-soul">
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Fish Sandwich</span><span class="item-price">$9.00</span></div><p class="item-desc">Crispy catfish fillet, coleslaw, hot sauce, pickles on a toasted hoagie roll.</p><span class="item-tag">Soul Classic</span></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Smothered Mac &amp; Cheese</span><span class="item-price">$6.00</span></div><p class="item-desc">Creamy four-cheese mac smothered in Rosie's pepper gravy. Baked to order.</p></div>
@@ -277,7 +375,6 @@
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Collard Green Quesadilla</span><span class="item-price">$7.50</span></div><p class="item-desc">Braised collard greens, smoked turkey, pepper jack, crispy tortilla.</p></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Soul Combo Plate</span><span class="item-price">$16.00</span></div><p class="item-desc">Fish sandwich + mac &amp; cheese + two wings. The full experience.</p><span class="item-tag">Best Value</span></div>
     </div>
-
     <div class="menu-panel" id="tab-sides">
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Seasoned Fries</span><span class="item-price">$4.00</span></div><p class="item-desc">Crispy hand-cut fries tossed in Rosie's house seasoning blend.</p></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Loaded Fries</span><span class="item-price">$7.00</span></div><p class="item-desc">Seasoned fries topped with cheese sauce, bacon bits, jalapeños, and sour cream.</p><span class="item-tag">Fan Favorite</span></div>
@@ -286,7 +383,6 @@
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Coleslaw</span><span class="item-price">$2.50</span></div><p class="item-desc">House-made creamy coleslaw with a hint of apple cider vinegar.</p></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Street Corn</span><span class="item-price">$4.50</span></div><p class="item-desc">Grilled corn, cotija cheese, chili lime butter, cilantro.</p><span class="item-tag">New</span></div>
     </div>
-
     <div class="menu-panel" id="tab-drinks">
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Sweet Tea</span><span class="item-price">$2.50</span></div><p class="item-desc">Southern-brewed sweet tea. Because it's the only way.</p></div>
       <div class="menu-item"><div class="menu-item-top"><span class="item-name">Rosie's Lemonade</span><span class="item-price">$3.50</span></div><p class="item-desc">Fresh-squeezed lemonade. Ask for the strawberry or mango swirl.</p><span class="item-tag">Fan Favorite</span></div>
@@ -358,6 +454,71 @@
   <a href="mailto:catering@rosieboissliders.com" class="btn-white">Get a Catering Quote</a>
 </section>
 
+<!-- CLM GIVEBACK -->
+<section class="clm-section">
+  <div class="clm-inner">
+    <div class="clm-heart">♥</div>
+    <p class="section-label">More Than a Meal</p>
+    <h2 class="section-title">We Give Back With Every Order</h2>
+    <div class="gold-rule" style="margin:18px auto 28px;"></div>
+    <p>Every time you eat with us, you're doing something bigger than feeding yourself. At Rosie Boi's, we believe food is community — and community takes care of its own.</p>
+    <p>That's why we've partnered with <strong>Crystal Life Ministries</strong>, a nonprofit dedicated to supporting families navigating autism. When you round up your order to the nearest dollar, <strong>100% of that change goes directly toward autism research, awareness, and family support</strong> — making a real difference in real lives.</p>
+    <p>One slider at a time. One family at a time. That's how we change the world.</p>
+    <span class="clm-badge">✦ Round Up at Checkout — Every Penny Counts ✦</span>
+    <a href="https://www.crystal-life-ministries.com" target="_blank" class="clm-link">Learn more about Crystal Life Ministries →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-header">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's Talk</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div id="contactForm" class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Your first name"/>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Your last name"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@email.com"/>
+      </div>
+      <div class="form-group">
+        <label for="reason">What Can We Help With?</label>
+        <select id="reason">
+          <option value="">Select a reason...</option>
+          <option>General Inquiry</option>
+          <option>Catering &amp; Events</option>
+          <option>Merch Order</option>
+          <option>Press &amp; Media</option>
+          <option>Partnership / Collaboration</option>
+          <option>Crystal Life Ministries / Donations</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell us what's on your mind..."></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="button" onclick="submitForm()">Send Message</button>
+      </div>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <p>Thank you for reaching out. ♥</p>
+      <p>We'll get back to you within 24–48 hours.</p>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -372,6 +533,7 @@
         <a href="#story">Our Story</a>
         <a href="#schedule">Find Us</a>
         <a href="#catering">Catering</a>
+        <a href="#contact">Contact</a>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
@@ -389,7 +551,18 @@
 </footer>
 
 <script>
-  // Menu tabs
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email, and message.');
+      return;
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const tabId = btn.dataset.tab;
@@ -400,7 +573,6 @@
     });
   });
 
-  // Fade-in on scroll
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -418,7 +590,6 @@
     observer.observe(el);
   });
 
-  // Nav shrink on scroll
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
