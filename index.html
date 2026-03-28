@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rosie Boi's Sliders – Comfort Food Since 2021</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --black:#0a0700; --dark:#120d04; --brown:#1e1106;
+      --gold:#c9952a; --gold-lt:#e8b84b; --cream:#f5e9c8;
+      --red:#c0272d; --red-dk:#8b1a1e; --white:#fff; --gray:#9a8060;
+    }
+    body { font-family:'Lato',sans-serif; background:var(--black); color:var(--cream); overflow-x:hidden; }
+    img { display:block; width:100%; object-fit:cover; }
+    a { text-decoration:none; color:inherit; }
+    ul { list-style:none; }
+
+    /* NAV */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 48px;
+      background:rgba(10,7,0,0.93);
+      border-bottom:1px solid rgba(201,149,42,0.2);
+      backdrop-filter:blur(8px);
+      transition:padding 0.3s, background 0.3s;
+    }
+    .nav-logo { height:52px; width:auto; }
+    .nav-logo img { height:100%; width:auto; object-fit:contain; }
+    .nav-links { display:flex; gap:34px; }
+    .nav-links a {
+      font-family:'Oswald',sans-serif; font-size:0.75rem;
+      letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--cream); opacity:0.8; transition:opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity:1; color:var(--gold-lt); }
+    .nav-cta { background:var(--red); color:var(--white)!important; padding:9px 22px; opacity:1!important; transition:background 0.2s!important; }
+    .nav-cta:hover { background:var(--red-dk)!important; }
+
+    /* HERO */
+    .hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; }
+    .hero-bg {
+      position:absolute; inset:0;
+      background-image:url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1800&q=85');
+      background-size:cover; background-position:center 35%;
+      animation:heroScale 14s ease-out forwards;
+    }
+    @keyframes heroScale { from{transform:scale(1.06)} to{transform:scale(1)} }
+    .hero-bg::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(110deg,rgba(8,5,0,0.92) 0%,rgba(15,9,2,0.7) 50%,rgba(8,5,0,0.3) 100%);
+    }
+    .hero-content {
+      position:relative; z-index:2;
+      padding:140px 64px 100px; max-width:640px;
+      animation:fadeUp 1s ease 0.2s both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    .hero-logo-wrap { width:340px; margin-bottom:28px; }
+    .hero-logo-wrap img { object-fit:contain; }
+    .hero-tagline { font-size:1.1rem; font-weight:300; letter-spacing:0.06em; color:var(--cream); opacity:0.9; margin-bottom:6px; }
+    .hero-sub { font-size:0.88rem; letter-spacing:0.14em; color:var(--gold); font-style:italic; margin-bottom:40px; }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+
+    .btn-red {
+      font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:0.18em;
+      text-transform:uppercase; background:var(--red); color:var(--white);
+      padding:14px 34px; border:none; cursor:pointer; display:inline-block;
+      transition:background 0.2s, transform 0.15s;
+    }
+    .btn-red:hover { background:var(--red-dk); transform:translateY(-2px); }
+    .btn-outline {
+      font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:0.18em;
+      text-transform:uppercase; background:transparent; color:var(--cream);
+      padding:13px 34px; border:1px solid var(--gold); cursor:pointer; display:inline-block;
+      transition:background 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { background:rgba(201,149,42,0.12); transform:translateY(-2px); }
+
+    .scroll-hint {
+      position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+      z-index:3; display:flex; flex-direction:column; align-items:center;
+      gap:8px; opacity:0.45; animation:bounce 2.2s infinite;
+    }
+    .scroll-hint span { font-family:'Oswald',sans-serif; font-size:0.58rem; letter-spacing:0.32em; color:var(--gold); }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+
+    /* CATEGORIES */
+    .cat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+    .cat-card { position:relative; height:320px; overflow:hidden; cursor:pointer; }
+    .cat-card img { height:100%; transition:transform 0.7s ease; }
+    .cat-card:hover img { transform:scale(1.08); }
+    .cat-card::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 30%,rgba(8,5,0,0.88) 100%); }
+    .cat-info { position:absolute; bottom:0; left:0; right:0; z-index:2; padding:24px 28px; text-align:center; }
+    .cat-info h3 { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--cream); margin-bottom:5px; }
+    .cat-info p { font-size:0.8rem; color:var(--gray); }
+
+    /* SHARED */
+    .section-label { font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:0.42em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,2.9rem); font-weight:900; color:var(--cream); line-height:1.1; }
+    .gold-rule { width:56px; height:2px; background:linear-gradient(90deg,var(--gold),transparent); margin:18px 0 0; }
+
+    /* MENU */
+    .menu-section { background:var(--black); padding:100px 48px; }
+    .menu-inner { max-width:1140px; margin:0 auto; }
+    .menu-header { text-align:center; margin-bottom:52px; }
+    .menu-header .gold-rule { margin:18px auto 0; }
+    .menu-tabs { display:flex; justify-content:center; gap:3px; margin-bottom:48px; flex-wrap:wrap; }
+    .tab-btn {
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:0.18em;
+      text-transform:uppercase; background:transparent; color:var(--gray);
+      border:1px solid #2a1f0e; padding:10px 26px; cursor:pointer; transition:all 0.2s;
+    }
+    .tab-btn.active,.tab-btn:hover { background:var(--red); color:var(--white); border-color:var(--red); }
+    .menu-panel { display:none; }
+    .menu-panel.active { display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:2px; }
+    .menu-item { background:var(--brown); padding:28px 30px; border-left:3px solid transparent; transition:border-color 0.25s, background 0.25s; }
+    .menu-item:hover { border-left-color:var(--gold); background:#261608; }
+    .menu-item-top { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:8px; }
+    .item-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--cream); }
+    .item-price { font-family:'Oswald',sans-serif; font-size:1.1rem; font-weight:600; color:var(--gold); white-space:nowrap; }
+    .item-desc { font-size:0.81rem; color:var(--gray); line-height:1.65; }
+    .item-tag { display:inline-block; margin-top:10px; font-family:'Oswald',sans-serif; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; background:var(--red); color:var(--white); padding:2px 9px; }
+
+    /* STORY */
+    .story-section { background:var(--dark); padding:100px 48px; }
+    .story-inner { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .story-text p { font-size:0.98rem; line-height:1.85; color:var(--cream); opacity:0.82; margin-bottom:16px; }
+    .story-img-wrap { position:relative; height:480px; }
+    .story-img-wrap img { height:100%; border:1px solid rgba(201,149,42,0.2); }
+    .story-img-wrap::before { content:''; position:absolute; top:16px; left:16px; right:-16px; bottom:-16px; border:1px solid rgba(201,149,42,0.12); z-index:-1; }
+
+    /* PHOTO STRIP */
+    .photo-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; height:300px; }
+    .photo-strip div { overflow:hidden; }
+    .photo-strip div img { height:100%; transition:transform 0.6s ease; }
+    .photo-strip div:hover img { transform:scale(1.07); }
+
+    /* MERCH + SCHEDULE */
+    .bottom-split { background:var(--black); padding:80px 48px; }
+    .bottom-grid { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .merch-links { margin-top:28px; }
+    .merch-links a { display:block; font-family:'Oswald',sans-serif; font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--cream); padding:14px 0; border-bottom:1px solid #1e1106; transition:color 0.2s, padding-left 0.2s; }
+    .merch-links a:hover { color:var(--gold-lt); padding-left:8px; }
+    .merch-links a::before { content:'— '; color:var(--gold); font-size:0.75rem; }
+    .schedule-list { margin-top:28px; }
+    .schedule-row { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid #1e1106; }
+    .schedule-day { font-family:'Oswald',sans-serif; font-size:0.85rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); }
+    .schedule-loc { font-size:0.85rem; color:var(--cream); opacity:0.75; }
+
+    /* CTA */
+    .catering-cta { background:var(--red); padding:80px 48px; text-align:center; }
+    .catering-cta .section-label { color:rgba(255,255,255,0.55); }
+    .catering-cta .section-title { color:var(--white); margin-bottom:16px; }
+    .catering-cta p { font-size:1rem; color:rgba(255,255,255,0.8); max-width:520px; margin:0 auto 36px; line-height:1.7; }
+    .btn-white { font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--white); color:var(--red-dk); padding:15px 40px; display:inline-block; transition:background 0.2s, transform 0.15s; font-weight:700; }
+    .btn-white:hover { background:var(--cream); transform:translateY(-2px); }
+
+    /* FOOTER */
+    footer { background:var(--dark); padding:56px 48px 32px; border-top:1px solid rgba(201,149,42,0.15); }
+    .footer-inner { max-width:1140px; margin:0 auto; }
+    .footer-top { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:60px; margin-bottom:48px; }
+    .footer-logo { width:180px; margin-bottom:16px; }
+    .footer-logo img { object-fit:contain; }
+    .footer-tagline { font-size:0.85rem; color:var(--gray); line-height:1.7; max-width:260px; }
+    .footer-col h4 { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+    .footer-col a { display:block; font-size:0.85rem; color:var(--gray); padding:5px 0; transition:color 0.2s; }
+    .footer-col a:hover { color:var(--cream); }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:28px; border-top:1px solid #1e1106; font-size:0.75rem; color:var(--gray); opacity:0.6; flex-wrap:wrap; gap:10px; }
+
+    /* MOBILE */
+    @media(max-width:768px){
+      nav{padding:10px 20px;}
+      .nav-links{display:none;}
+      .hero-content{padding:110px 24px 80px;}
+      .hero-logo-wrap{width:250px;}
+      .cat-grid{grid-template-columns:1fr;}
+      .cat-card{height:220px;}
+      .menu-section{padding:70px 20px;}
+      .story-inner{grid-template-columns:1fr;gap:40px;}
+      .story-img-wrap{height:280px;}
+      .photo-strip{grid-template-columns:1fr;height:auto;}
+      .photo-strip div{height:200px;}
+      .bottom-grid{grid-template-columns:1fr;gap:48px;}
+      .bottom-split{padding:60px 20px;}
+      .footer-top{grid-template-columns:1fr;gap:36px;}
+      footer{padding:48px 20px 24px;}
+      .catering-cta{padding:60px 20px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo"><img src="logo.png" alt="Rosie Boi's Sliders"/></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#schedule">Find Us</a></li>
+    <li><a href="#catering" class="nav-cta">Book Catering</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-logo-wrap"><img src="logo.png" alt="Rosie Boi's Sliders"/></div>
+    <p class="hero-tagline">Big flavor. Small burgers. Family tradition.</p>
+    <p class="hero-sub">Comfort Food · Estd 2021</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-red">Order Now</a>
+      <a href="#catering" class="btn-outline">Book Catering</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="rgba(201,149,42,0.7)" stroke-width="1.5">
+      <path d="M8 1v13M2 9l6 7 6-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=800&q=80" alt="Sliders" style="height:100%;"/>
+      <div class="cat-info"><h3>Sliders</h3><p>Juicy mini burgers stacked with flavor</p></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=800&q=80" alt="Soul Food" style="height:100%;"/>
+      <div class="cat-info"><h3>Soul Food Favorites</h3><p>Fish sandwiches, fries, mac &amp; cheese</p></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" alt="Catering" style="height:100%;"/>
+      <div class="cat-info"><h3>Catering Events</h3><p>Parties, corporate events, festivals</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <p class="section-label">What We're Serving</p>
+      <h2 class="section-title">The Menu</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" data-tab="sliders">Sliders</button>
+      <button class="tab-btn" data-tab="soul">Soul Food</button>
+      <button class="tab-btn" data-tab="sides">Sides</button>
+      <button class="tab-btn" data-tab="drinks">Drinks</button>
+    </div>
+
+    <div class="menu-panel active" id="tab-sliders">
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Classic Rosie Slider</span><span class="item-price">$5.00</span></div><p class="item-desc">Smash-style beef patty, American cheese, pickles, Rosie sauce on a buttered brioche bun.</p><span class="item-tag">Fan Favorite</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Double Stack Slider</span><span class="item-price">$7.50</span></div><p class="item-desc">Two smashed patties, double cheese, caramelized onions, special sauce.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">BBQ Bacon Slider</span><span class="item-price">$7.00</span></div><p class="item-desc">Beef patty, crispy bacon, smoked BBQ sauce, cheddar, crispy onion strings.</p><span class="item-tag">New</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Spicy Jalapeño Slider</span><span class="item-price">$6.50</span></div><p class="item-desc">Beef patty, pepper jack, fresh jalapeños, chipotle mayo, pickles.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Mushroom Swiss Slider</span><span class="item-price">$6.50</span></div><p class="item-desc">Beef patty, sautéed mushrooms, Swiss cheese, garlic aioli.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Slider 3-Pack</span><span class="item-price">$14.00</span></div><p class="item-desc">Any three sliders of your choice. Mix and match.</p><span class="item-tag">Best Value</span></div>
+    </div>
+
+    <div class="menu-panel" id="tab-soul">
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Fish Sandwich</span><span class="item-price">$9.00</span></div><p class="item-desc">Crispy catfish fillet, coleslaw, hot sauce, pickles on a toasted hoagie roll.</p><span class="item-tag">Soul Classic</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Smothered Mac &amp; Cheese</span><span class="item-price">$6.00</span></div><p class="item-desc">Creamy four-cheese mac smothered in Rosie's pepper gravy. Baked to order.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Honey Butter Wings</span><span class="item-price">$12.00</span></div><p class="item-desc">8 crispy wings tossed in house honey-butter glaze. Served with ranch.</p><span class="item-tag">Fan Favorite</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Chicken &amp; Waffle Slider</span><span class="item-price">$8.00</span></div><p class="item-desc">Fried chicken tender, mini waffle buns, maple syrup drizzle, hot sauce.</p><span class="item-tag">New</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Collard Green Quesadilla</span><span class="item-price">$7.50</span></div><p class="item-desc">Braised collard greens, smoked turkey, pepper jack, crispy tortilla.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Soul Combo Plate</span><span class="item-price">$16.00</span></div><p class="item-desc">Fish sandwich + mac &amp; cheese + two wings. The full experience.</p><span class="item-tag">Best Value</span></div>
+    </div>
+
+    <div class="menu-panel" id="tab-sides">
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Seasoned Fries</span><span class="item-price">$4.00</span></div><p class="item-desc">Crispy hand-cut fries tossed in Rosie's house seasoning blend.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Loaded Fries</span><span class="item-price">$7.00</span></div><p class="item-desc">Seasoned fries topped with cheese sauce, bacon bits, jalapeños, and sour cream.</p><span class="item-tag">Fan Favorite</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Onion Rings</span><span class="item-price">$4.50</span></div><p class="item-desc">Beer-battered thick-cut rings. Served with comeback sauce.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Mac &amp; Cheese Cup</span><span class="item-price">$4.00</span></div><p class="item-desc">Small cup of our signature creamy four-cheese mac.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Coleslaw</span><span class="item-price">$2.50</span></div><p class="item-desc">House-made creamy coleslaw with a hint of apple cider vinegar.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Street Corn</span><span class="item-price">$4.50</span></div><p class="item-desc">Grilled corn, cotija cheese, chili lime butter, cilantro.</p><span class="item-tag">New</span></div>
+    </div>
+
+    <div class="menu-panel" id="tab-drinks">
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Sweet Tea</span><span class="item-price">$2.50</span></div><p class="item-desc">Southern-brewed sweet tea. Because it's the only way.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Rosie's Lemonade</span><span class="item-price">$3.50</span></div><p class="item-desc">Fresh-squeezed lemonade. Ask for the strawberry or mango swirl.</p><span class="item-tag">Fan Favorite</span></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Fountain Drink</span><span class="item-price">$2.00</span></div><p class="item-desc">Pepsi products. Free refills at the truck window.</p></div>
+      <div class="menu-item"><div class="menu-item-top"><span class="item-name">Bottled Water</span><span class="item-price">$1.50</span></div><p class="item-desc">Ice cold.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section" id="story">
+  <div class="story-inner">
+    <div class="story-text">
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">Our Story</h2>
+      <div class="gold-rule" style="margin-bottom:28px;"></div>
+      <p>Rosie Boi's Sliders was built on family recipes and a love for comfort food. Every slider we serve is a piece of that tradition — the kind of food that brings people to the table and keeps them there.</p>
+      <p>Named after our grandmother Rosie, the woman who believed that great food binds people together. From backyard cookouts to the streets, Rosie's spirit lives in every bite we serve.</p>
+      <p>From our first pop-up in 2021 to a full catering operation, we've stayed true to one thing: bold flavors, real ingredients, and food made with love.</p>
+      <div style="margin-top:36px;"><a href="#catering" class="btn-red">Book Us for Your Event</a></div>
+    </div>
+    <div class="story-img-wrap">
+      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80" alt="Rosie Boi's Food Truck"/>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=80" alt="Slider closeup" style="height:100%;"/></div>
+  <div><img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800&q=80" alt="Mac and cheese" style="height:100%;"/></div>
+  <div><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&q=80" alt="Wings" style="height:100%;"/></div>
+</div>
+
+<!-- MERCH + SCHEDULE -->
+<section class="bottom-split" id="schedule">
+  <div class="bottom-grid">
+    <div>
+      <p class="section-label">Represent</p>
+      <h2 class="section-title">Rep Rosie Boi's</h2>
+      <div class="gold-rule"></div>
+      <div class="merch-links">
+        <a href="#">Hoodies</a>
+        <a href="#">T-Shirts</a>
+        <a href="#">Hats &amp; Caps</a>
+        <a href="#">Stickers &amp; Pins</a>
+        <a href="#">Gift Cards</a>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">Come Find Us</p>
+      <h2 class="section-title">Where We'll Be</h2>
+      <div class="gold-rule"></div>
+      <div class="schedule-list">
+        <div class="schedule-row"><span class="schedule-day">Friday</span><span class="schedule-loc">Midtown – 5PM to 9PM</span></div>
+        <div class="schedule-row"><span class="schedule-day">Saturday</span><span class="schedule-loc">Events &amp; Catering</span></div>
+        <div class="schedule-row"><span class="schedule-day">Sunday</span><span class="schedule-loc">Private Bookings</span></div>
+      </div>
+      <div style="margin-top:28px;"><a href="#" class="btn-outline">Follow the Truck</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATERING CTA -->
+<section class="catering-cta" id="catering">
+  <p class="section-label">Let's Make It Special</p>
+  <h2 class="section-title">Book Rosie Boi's for Your Event</h2>
+  <p>Corporate lunches, birthday parties, festivals, private dinners — we bring the flavor to you. Let's talk about feeding your crowd.</p>
+  <a href="mailto:catering@rosieboissliders.com" class="btn-white">Get a Catering Quote</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><img src="logo.png" alt="Rosie Boi's Sliders"/></div>
+        <p class="footer-tagline">Big flavor. Small burgers. Family tradition. Serving comfort food since 2021.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#schedule">Find Us</a>
+        <a href="#catering">Catering</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+        <a href="mailto:info@rosieboissliders.com">Email Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Rosie Boi's Sliders. All rights reserved.</span>
+      <span>Comfort Food · Estd 2021</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menu tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.dataset.tab;
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+    });
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.menu-item, .cat-card, .schedule-row, .story-text, .story-img-wrap').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+
+  // Nav shrink on scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.padding = '7px 48px';
+      nav.style.background = 'rgba(10,7,0,0.98)';
+    } else {
+      nav.style.padding = '12px 48px';
+      nav.style.background = 'rgba(10,7,0,0.93)';
+    }
+  });
+</script>
+</body>
+</html>
